@@ -89,6 +89,17 @@ exports.createStudent = async (req, res, next) => {
       });
     }
 
+    if (phone) {
+      const phoneExists = await prisma.student.findUnique({ where: { phone } });
+      if (phoneExists) {
+        return res.status(409).json({
+          success: false,
+          data: null,
+          message: 'A student with this phone number already exists',
+        });
+      }
+    }
+
     const student = await prisma.student.create({
       data: {
         firstName: first_name,
@@ -136,6 +147,19 @@ exports.updateStudent = async (req, res, next) => {
         data: null,
         message: 'A student with this email already exists',
       });
+    }
+
+    if (phone) {
+      const phoneCheck = await prisma.student.findFirst({
+        where: { phone, id: { not: parseInt(id) } },
+      });
+      if (phoneCheck) {
+        return res.status(409).json({
+          success: false,
+          data: null,
+          message: 'A student with this phone number already exists',
+        });
+      }
     }
 
     const student = await prisma.student.update({

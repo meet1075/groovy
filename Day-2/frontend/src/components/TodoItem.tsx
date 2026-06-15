@@ -24,6 +24,7 @@ interface Props {
 
 export default function TodoItem({ todo, categories, onToast }: Props) {
   const [editing, setEditing] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const update = useUpdateTodo()
   const remove = useDeleteTodo()
 
@@ -43,8 +44,13 @@ export default function TodoItem({ todo, categories, onToast }: Props) {
   }
 
   function handleDelete() {
+    setConfirmDelete(true)
+  }
+
+  function confirmDeleteAction() {
     remove.mutate(todo.id)
     onToast('🗑 Task deleted')
+    setConfirmDelete(false)
   }
 
   const overdue = isOverdue(todo.due_date)
@@ -123,15 +129,17 @@ export default function TodoItem({ todo, categories, onToast }: Props) {
 
         {/* Actions */}
         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
-          <button
-            id={`edit-todo-${todo.id}`}
-            onClick={() => setEditing(true)}
-            className="p-1.5 rounded-lg text-[#8b93b8] hover:bg-white/8 hover:text-[#f0f2ff]
-                       transition-all duration-150 text-sm"
-            aria-label="Edit task"
-          >
-            ✏️
-          </button>
+          {!todo.completed && (
+            <button
+              id={`edit-todo-${todo.id}`}
+              onClick={() => setEditing(true)}
+              className="p-1.5 rounded-lg text-[#8b93b8] hover:bg-white/8 hover:text-[#f0f2ff]
+                         transition-all duration-150 text-sm"
+              aria-label="Edit task"
+            >
+              ✏️
+            </button>
+          )}
           <button
             id={`delete-todo-${todo.id}`}
             onClick={handleDelete}
@@ -151,6 +159,43 @@ export default function TodoItem({ todo, categories, onToast }: Props) {
           onClose={() => setEditing(false)}
           onToast={onToast}
         />
+      )}
+
+      {confirmDelete && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4
+                     bg-black/70 backdrop-blur-md animate-[fade-in_0.15s_ease]"
+          onClick={e => { if (e.target === e.currentTarget) setConfirmDelete(false) }}
+        >
+          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#1a1d32]
+                          shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-6
+                          animate-[slide-up_0.2s_ease]">
+            <div className="text-center mb-5">
+              <div className="text-4xl mb-3">⚠️</div>
+              <h3 className="text-base font-bold text-[#f0f2ff] mb-1">Delete Task?</h3>
+              <p className="text-sm text-[#8b93b8]">This action cannot be undone.</p>
+            </div>
+            <div className="flex justify-center gap-2">
+              <button
+                onClick={() => setConfirmDelete(false)}
+                className="px-4 py-2 rounded-xl border border-white/10 text-sm font-semibold
+                           text-[#8b93b8] hover:bg-white/5 hover:text-[#f0f2ff]
+                           transition-all duration-150"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteAction}
+                className="px-4 py-2 rounded-xl bg-gradient-to-br from-rose-500 to-rose-700
+                           text-sm font-semibold text-white shadow-[0_4px_15px_rgba(239,68,68,0.35)]
+                           hover:shadow-[0_6px_20px_rgba(239,68,68,0.5)] hover:-translate-y-px
+                           transition-all duration-200"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   )

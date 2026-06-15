@@ -22,7 +22,7 @@ export default function TodoForm({ categories, onToast }: Props) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    if (!title.trim()) return
+    if (!title.trim() || title.trim().length > 20) return
     create.mutate({ title, description: desc, priority, category, due_date: dueDate || null })
   }
 
@@ -47,14 +47,16 @@ export default function TodoForm({ categories, onToast }: Props) {
           type="text"
           placeholder="Add a new task…"
           value={title}
-          onChange={e => { setTitle(e.target.value); setExpanded(true) }}
+          onChange={e => { if (e.target.value.length <= 20) { setTitle(e.target.value); setExpanded(true) } }}
           onFocus={() => setExpanded(true)}
+          maxLength={20}
           className={`${inputCls} flex-1`}
           autoComplete="off"
         />
+        <span className="text-xs text-[#4b5280] self-center">{title.length}/20</span>
         <button
           type="submit"
-          disabled={!title.trim() || create.isPending}
+          disabled={!title.trim() || title.trim().length > 20 || create.isPending}
           id="add-todo-btn"
           className="flex items-center gap-1.5 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700
                      px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_15px_rgba(139,92,246,0.4)]
@@ -113,6 +115,7 @@ export default function TodoForm({ categories, onToast }: Props) {
             <input
               type="date"
               value={dueDate}
+              min={new Date().toISOString().split('T')[0]}
               onChange={e => setDueDate(e.target.value)}
               className={inputCls}
             />

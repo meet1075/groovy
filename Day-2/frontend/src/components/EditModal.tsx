@@ -20,7 +20,7 @@ export default function EditModal({ todo, categories, onClose, onToast }: Props)
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    if (!title.trim()) return
+    if (!title.trim() || title.trim().length > 20) return
     update.mutate(
       { id: todo.id, title, description: desc, priority, category, due_date: dueDate || null },
       {
@@ -67,10 +67,12 @@ export default function EditModal({ todo, categories, onClose, onToast }: Props)
               id="edit-title"
               type="text"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={e => { if (e.target.value.length <= 20) setTitle(e.target.value) }}
+              maxLength={20}
               className={inputCls}
               autoFocus
             />
+            <span className="text-xs text-[#4b5280]">{title.length}/20</span>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -117,6 +119,7 @@ export default function EditModal({ todo, categories, onClose, onToast }: Props)
               <input
                 type="date"
                 value={dueDate}
+                min={new Date().toISOString().split('T')[0]}
                 onChange={e => setDueDate(e.target.value)}
                 className={inputCls}
               />
@@ -135,7 +138,7 @@ export default function EditModal({ todo, categories, onClose, onToast }: Props)
             </button>
             <button
               type="submit"
-              disabled={!title.trim() || update.isPending}
+              disabled={!title.trim() || title.trim().length > 20 || update.isPending}
               className="px-4 py-2 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700
                          text-sm font-semibold text-white shadow-[0_4px_15px_rgba(139,92,246,0.35)]
                          hover:shadow-[0_6px_20px_rgba(139,92,246,0.5)] hover:-translate-y-px

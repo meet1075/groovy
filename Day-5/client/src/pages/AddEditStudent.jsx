@@ -52,7 +52,7 @@ const AddEditStudent = () => {
     if (!formData.last_name.trim()) e.last_name = 'Required';
     if (!formData.email.trim()) e.email = 'Required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) e.email = 'Invalid email format';
-    if (formData.phone && !/^\d{7,15}$/.test(formData.phone)) e.phone = 'Phone must be 7-15 digits';
+    if (formData.phone && !/^\d{10}$/.test(formData.phone)) e.phone = 'Phone must be exactly 10 digits';
     if (!formData.course.trim()) e.course = 'Required';
     if (!formData.enrollment_year) e.enrollment_year = 'Required';
     else if (formData.enrollment_year < 2000 || formData.enrollment_year > 2030) e.enrollment_year = 'Must be 2000-2030';
@@ -63,7 +63,7 @@ const AddEditStudent = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'phone' && value && !/^\d{0,15}$/.test(value)) return;
+    if (name === 'phone' && value && !/^\d{0,10}$/.test(value)) return;
     if (name === 'enrollment_year' && value && !/^\d{0,4}$/.test(value)) return;
     if (name === 'first_name' || name === 'last_name') {
       if (value && !/^[a-zA-Z\s]*$/.test(value)) return;
@@ -137,7 +137,7 @@ const AddEditStudent = () => {
               </div>
               <div className="form-group">
                 <label>Phone</label>
-                <input name="phone" type="tel" placeholder="Digits only (max 15)" maxLength="15" value={formData.phone} onChange={handleChange} className={errors.phone ? 'error' : ''} />
+                <input name="phone" type="tel" placeholder="Exactly 10 digits" maxLength="10" value={formData.phone} onChange={handleChange} className={errors.phone ? 'error' : ''} />
                 {errors.phone && <span className="field-error">{errors.phone}</span>}
               </div>
               <div className="form-group">

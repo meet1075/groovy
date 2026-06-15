@@ -17,7 +17,8 @@ const validateStudent = [
   body('phone')
     .optional({ values: 'null' })
     .trim()
-    .isLength({ max: 15 }).withMessage('Phone must be 15 characters or less'),
+    .isLength({ min: 10, max: 10 }).withMessage('Phone must be exactly 10 digits')
+    .isNumeric().withMessage('Phone must contain only numbers'),
   body('date_of_birth')
     .optional({ values: 'null' })
     .isISO8601().withMessage('Must be a valid date'),
