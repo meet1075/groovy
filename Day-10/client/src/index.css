@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { font-family: "Inter", system-ui, sans-serif; }
+.font-serif { font-family: "Lora", Georgia, serif; }
+.font-mono { font-family: "JetBrains Mono", monospace; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #50463d; border-radius: 3px; }
+
+/* Highlight animation for cited page */
+@keyframes page-highlight {
+  0% { background-color: rgba(230, 184, 0, 0.3); }
+  100% { background-color: transparent; }
+}
+.page-highlight { animation: page-highlight 2s ease-out; }
+
+/* Markdown */
+.markdown-answer h1, .markdown-answer h2, .markdown-answer h3 { font-weight: 600; margin: 0.75rem 0 0.5rem; }
+.markdown-answer h1 { font-size: 1.25rem; }
+.markdown-answer h2 { font-size: 1.1rem; }
+.markdown-answer p { margin-bottom: 0.5rem; line-height: 1.7; }
+.markdown-answer ul, .markdown-answer ol { padding-left: 1.25rem; margin-bottom: 0.5rem; }
+.markdown-answer li { margin-bottom: 0.25rem; }
+.markdown-answer ul li { list-style-type: disc; }
+.markdown-answer ol li { list-style-type: decimal; }
+.markdown-answer code { font-family: "JetBrains Mono", monospace; font-size: 0.85rem; background: #2b2420; padding: 0.1rem 0.35rem; border-radius: 0.2rem; }
+.markdown-answer pre { background: #2b2420; padding: 0.75rem; border-radius: 0.4rem; overflow-x: auto; margin-bottom: 0.5rem; }
+.markdown-answer pre code { background: none; padding: 0; }
+.markdown-answer blockquote { border-left: 3px solid #e6b800; padding-left: 0.75rem; color: #c4baa9; margin-bottom: 0.5rem; }
