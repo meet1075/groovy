@@ -1,0 +1,15 @@
+{
+  "name": "day-7-multi-provider-cli",
+  "version": "1.0.0",
+  "description": "Multi-provider AI CLI — Groq, Gemini, OpenRouter",
+  "main": "cli.js",
+  "type": "module",
+  "scripts": {
+    "groq":       "node cli.js --provider groq",
+    "gemini":     "node cli.js --provider gemini",
+    "openrouter": "node cli.js --provider openrouter"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
