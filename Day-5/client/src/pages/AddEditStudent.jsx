@@ -142,7 +142,7 @@ const AddEditStudent = () => {
               </div>
               <div className="form-group">
                 <label>Date of Birth</label>
-                <input name="date_of_birth" type="date" value={formData.date_of_birth} onChange={handleChange} />
+                <input name="date_of_birth" type="date" max={new Date().toISOString().split('T')[0]} value={formData.date_of_birth} onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label>Gender</label>
