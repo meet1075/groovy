@@ -71,43 +71,58 @@ GPT-4o + o1 ──── Multi-step problem solving
 ## Model Pricing & Token Limits Reference
 
 > Prices are per **1 million tokens (MTok)**. 1 token ≈ 4 characters or ¾ of a word.
-> Costs shown in **USD**. Verified June 2025 — check provider dashboards for latest.
+> Costs shown in **USD**. **Verified June 2026** from official provider dashboards.
 
 ### Anthropic — Claude
 
-| Model | Context Window | Input Price /MTok | Output Price /MTok | Free Tier | Best For |
+| Model | Context Window | Input /MTok | Output /MTok | Free Tier | Best For |
 |---|---|---|---|---|---|
-| **Claude Haiku 3.5** | 200K tokens | $0.80 | $4.00 | Via API trial | Fast, cheap tasks — light coding, summaries |
-| **Claude Sonnet 4.5** | 200K tokens | $3.00 | $15.00 | Via API trial | Everyday coding, writing, reasoning |
-| **Claude Sonnet 4.6** | 200K tokens | $3.00 | $15.00 | Via API trial | Best everyday workhorse — code + analysis |
-| **Claude Opus 4** | 200K tokens | $15.00 | $75.00 | ❌ | Hardest reasoning, critical code, complex plans |
+| **Claude Haiku 4.5** | 1M tokens | $1.00 | $5.00 | Via API trial | Fast, cheap — light coding, summaries |
+| **Claude Sonnet 4.6** | 1M tokens | $3.00 | $15.00 | Via API trial | Best everyday workhorse — code + analysis |
+| **Claude Opus 4.6 / 4.7 / 4.8** | 1M tokens | $5.00 | $25.00 | ❌ | Current flagship — hardest reasoning, critical code |
+| **Claude Opus 4.1** *(legacy)* | 200K tokens | $15.00 | $75.00 | ❌ | Legacy high-power model |
+
+**Batch API discounts:**
+| Model | Batch Input /MTok | Batch Output /MTok |
+|---|---|---|
+| Opus 4.x | $2.50 | $12.50 |
+| Sonnet 4.6 | $1.50 | $7.50 |
+| Haiku 4.5 | $0.50 | $2.50 |
 
 > **Token rule of thumb:** 1K tokens ≈ 750 words ≈ 3 pages of text.
-> Claude 200K context ≈ ~150,000 words ≈ a full novel.
+> Opus 4.8 and Sonnet 4.6 support a **full 1M context window** at standard pricing.
 
 ---
 
 ### Google — Gemini
 
-| Model | Context Window | Input Price /MTok | Output Price /MTok | Free Tier | Best For |
+| Model | Context Window | Input /MTok | Output /MTok | Free Tier | Best For |
 |---|---|---|---|---|---|
-| **Gemini 2.5 Flash** | 1M tokens | $0.15 (text) | $0.60 | ✅ Generous free quota | Speed + multimodal + huge context |
-| **Gemini 2.5 Flash (thinking)** | 1M tokens | $0.15 | $3.50 | ✅ | Complex reasoning with thinking mode |
-| **Gemini 2.5 Pro** | 1M tokens | $1.25 (≤200K) / $2.50 (>200K) | $10.00 | Limited free | Precision multimodal + long documents |
+| **Gemini 2.5 Flash-Lite** | 1M tokens | $0.10 | $0.40 | ✅ Free quota | Ultra-cheap, high-volume simple tasks |
+| **Gemini 2.5 Flash** | 1M tokens | $0.30 | $2.50 | ✅ Free quota | Speed + multimodal + large context |
+| **Gemini 3.1 Flash-Lite** | 1M tokens | $0.25 | $1.50 | ✅ Free quota | Cheap next-gen flash model |
+| **Gemini 3 Flash Preview** | 1M tokens | $0.50 | $3.00 | ✅ Limited | Next-gen flash, preview access |
+| **Gemini 3.5 Flash** | 1M tokens | $1.50 | $9.00 | ❌ | Premium flash — fast + capable |
+| **Gemini 2.5 Pro** | 1M tokens | $1.25 (≤200K) / — | $10.00 | ❌ (removed Apr 2026) | Precision multimodal + long documents |
+| **Gemini 3.1 Pro** | 1M tokens | $2.00 (≤200K) / $4.00 (>200K) | $12.00 / $18.00 | ❌ | Latest Pro — complex multimodal + reasoning |
 
-> **Context comparison:** Gemini 1M context ≈ 750,000 words ≈ ~10 full novels or a large codebase.
+> **Free tier note:** As of **April 1, 2026**, Pro models are no longer on the free tier. Only Flash and Flash-Lite retain free access with reduced quotas.
+> **Batch API:** 50% discount on all models. **Cache reads:** 10% of base input price.
+> Gemini 1M context ≈ 750,000 words ≈ ~10 full novels or a large codebase.
 
 ---
 
 ### OpenAI — GPT
 
-| Model | Context Window | Input Price /MTok | Output Price /MTok | Free Tier | Best For |
+| Model | Context Window | Input /MTok | Output /MTok | Free Tier | Best For |
 |---|---|---|---|---|---|
-| **GPT-4o-mini** | 128K tokens | $0.15 | $0.60 | Via ChatGPT free | High-volume simple queries, cheap RAG |
-| **GPT-4o** | 128K tokens | $2.50 | $10.00 | Limited | General purpose, agents, function calling |
-| **o1-mini** | 128K tokens | $3.00 | $12.00 | ❌ | Science, math, code reasoning |
-| **o1** | 200K tokens | $15.00 | $60.00 | ❌ | Multi-step reasoning, research-level problems |
-| **o3** | 200K tokens | $10.00 | $40.00 | ❌ | Frontier reasoning (latest OpenAI model) |
+| **GPT-4.1 nano** | 128K tokens | $0.10 | $0.40 | Via ChatGPT | Ultra-cheap, simple queries |
+| **GPT-4o mini** | 128K tokens | $0.15 | $0.60 | Via ChatGPT | High-volume queries, cheap RAG |
+| **GPT-4.1 mini** | 128K tokens | $0.40 | $1.60 | Limited | Balanced speed + quality |
+| **GPT-4.1** | 128K tokens | $2.00 | $8.00 | ❌ | General purpose, agents, function calling |
+| **GPT-4o** *(legacy)* | 128K tokens | $2.50 | $10.00 | ❌ | Legacy flagship |
+| **GPT-5.4** | 128K tokens | $2.50 | $15.00 | ❌ | GPT-5 series — strong reasoning |
+| **GPT-5.5** *(current flagship)* | 128K tokens | $5.00 | $30.00 | ❌ | Best OpenAI model — frontier tasks |
 
 ---
 
@@ -136,23 +151,33 @@ GPT-4o + o1 ──── Multi-step problem solving
 
 ## All-Models Comparison Snapshot
 
+*Sorted cheapest → most expensive (input price). Updated June 2026.*
+
 | Model | Provider | Input /MTok | Output /MTok | Context | Speed | Strength |
 |---|---|---|---|---|---|---|
-| Llama 3.1 8B (Groq) | Groq | $0.05 | $0.08 | 128K | ⚡⚡⚡ | Ultra-cheap, fast |
-| GPT-4o-mini | OpenAI | $0.15 | $0.60 | 128K | ⚡⚡⚡ | Cheap + capable |
-| Gemini 2.5 Flash | Google | $0.15 | $0.60 | 1M | ⚡⚡⚡ | Multimodal + huge context |
-| Command R | Cohere | $0.15 | $0.60 | 128K | ⚡⚡ | RAG + enterprise |
-| Claude Haiku 3.5 | Anthropic | $0.80 | $4.00 | 200K | ⚡⚡⚡ | Fast Claude, light coding |
+| Llama 3.1 8B (Groq) | Groq | $0.05 | $0.08 | 128K | ⚡⚡⚡ | Ultra-cheap open model |
+| Gemini 2.5 Flash-Lite | Google | $0.10 | $0.40 | 1M | ⚡⚡⚡ | Cheapest Gemini + 1M context |
+| GPT-4.1 nano | OpenAI | $0.10 | $0.40 | 128K | ⚡⚡⚡ | Cheapest OpenAI |
+| GPT-4o mini | OpenAI | $0.15 | $0.60 | 128K | ⚡⚡⚡ | Cheap + capable |
+| Command R | Cohere | $0.15 | $0.60 | 128K | ⚡⚡ | Cheap RAG |
+| Gemini 3.1 Flash-Lite | Google | $0.25 | $1.50 | 1M | ⚡⚡⚡ | Next-gen cheap flash |
 | Llama 3.3 70B (Groq) | Groq | $0.59 | $0.79 | 128K | ⚡⚡⚡ | Fast open model |
-| GPT-4o | OpenAI | $2.50 | $10.00 | 128K | ⚡⚡ | Agents, function calling |
+| Gemini 2.5 Flash | Google | $0.30 | $2.50 | 1M | ⚡⚡⚡ | Multimodal + huge context |
+| GPT-4.1 mini | OpenAI | $0.40 | $1.60 | 128K | ⚡⚡⚡ | Balanced budget option |
+| Gemini 3 Flash Preview | Google | $0.50 | $3.00 | 1M | ⚡⚡⚡ | Preview next-gen flash |
+| Claude Haiku 4.5 | Anthropic | $1.00 | $5.00 | 1M | ⚡⚡⚡ | Fast Claude, light coding |
+| GPT-4.1 | OpenAI | $2.00 | $8.00 | 128K | ⚡⚡ | Agents, function calling |
+| Gemini 2.5 Pro | Google | $1.25 | $10.00 | 1M | ⚡⚡ | Complex multimodal |
+| GPT-4o *(legacy)* | OpenAI | $2.50 | $10.00 | 128K | ⚡⚡ | Legacy flagship |
+| GPT-5.4 | OpenAI | $2.50 | $15.00 | 128K | ⚡⚡ | GPT-5 strong reasoning |
 | Command R+ | Cohere | $2.50 | $10.00 | 128K | ⚡⚡ | Advanced RAG |
 | Command A | Cohere | $2.50 | $10.00 | 256K | ⚡⚡ | Cohere flagship |
-| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | 200K | ⚡⚡ | Best everyday coding |
-| Gemini 2.5 Pro | Google | $1.25–$2.50 | $10.00 | 1M | ⚡⚡ | Complex multimodal |
-| o1-mini | OpenAI | $3.00 | $12.00 | 128K | ⚡ | Math + science reasoning |
-| o3 | OpenAI | $10.00 | $40.00 | 200K | ⚡ | Frontier reasoning |
-| Claude Opus 4 | Anthropic | $15.00 | $75.00 | 200K | ⚡ | Hardest problems |
-| o1 | OpenAI | $15.00 | $60.00 | 200K | ⚡ | Research-level reasoning |
+| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | 1M | ⚡⚡ | Best everyday coding |
+| Gemini 3.1 Pro | Google | $2.00–$4.00 | $12–$18 | 1M | ⚡⚡ | Latest Pro multimodal |
+| Gemini 3.5 Flash | Google | $1.50 | $9.00 | 1M | ⚡⚡ | Premium fast model |
+| Claude Opus 4.6–4.8 | Anthropic | $5.00 | $25.00 | 1M | ⚡ | Current flagship — hardest tasks |
+| GPT-5.5 | OpenAI | $5.00 | $30.00 | 128K | ⚡ | OpenAI current flagship |
+| Claude Opus 4.1 *(legacy)* | Anthropic | $15.00 | $75.00 | 200K | ⚡ | Legacy max power |
 
 ---
 
@@ -160,12 +185,11 @@ GPT-4o + o1 ──── Multi-step problem solving
 
 Quick estimate: **how much does 1 conversation cost?**
 
-| Scenario | Tokens Used | GPT-4o-mini cost | GPT-4o cost | Claude Sonnet cost |
-|---|---|---|---|---|
-| Short Q&A (1 exchange) | ~500 | $0.0001 | $0.002 | $0.003 |
-| Medium chat (10 turns) | ~5,000 | $0.001 | $0.02 | $0.03 |
-| Long analysis (50 pages doc) | ~40,000 | $0.008 | $0.15 | $0.24 |
-| Full codebase review (200K tokens) | ~200,000 | $0.045 | $0.70 | $1.20 |
+| Scenario | Tokens Used | GPT-4o mini | GPT-4.1 | Claude Sonnet 4.6 | Gemini 2.5 Flash |
+|---|---|---|---|---|---|
+| Short Q&A (1 exchange) | ~500 | $0.0001 | $0.001 | $0.003 | $0.0001 |
+| Medium chat (10 turns) | ~5,000 | $0.001 | $0.01 | $0.03 | $0.001 |
+| Long analysis (50 pages doc) | ~40,000 | $0.009 | $0.10 | $0.24 | $0.012 |
+| Full codebase review (200K tokens) | ~200,000 | $0.045 | $0.50 | $1.20 | $0.06 |
 
 > **Rule:** Output tokens cost 4–5× more than input tokens for most models — keep your outputs concise when cost matters.
-
