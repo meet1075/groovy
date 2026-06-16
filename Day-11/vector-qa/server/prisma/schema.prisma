@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id           Int      @id @default(autoincrement())
+  filename     String   @db.VarChar(255)
+  uploadedAt   DateTime @default(now()) @map("uploaded_at")
+  pageCount    Int      @map("page_count")
+  totalChunks  Int      @default(0) @map("total_chunks")
+  pineconeNs   String   @map("pinecone_namespace") @db.VarChar(100)
+
+  chunks DocumentChunk[]
+  queries Query[]
+
+  @@map("documents")
+}
+
+model DocumentChunk {
+  id         Int    @id @default(autoincrement())
+  documentId Int    @map("document_id")
+  pageNumber Int    @map("page_number")
+  chunkIndex Int    @map("chunk_index")
+  chunkText  String @map("chunk_text") @db.Text
+  pineconeId String @map("pinecone_id") @db.VarChar(100)
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, chunkIndex])
+  @@map("document_chunks")
+}
+
+model Query {
+  id              Int      @id @default(autoincrement())
+  documentId      Int      @map("document_id")
+  question        String   @db.Text
+  answer          String   @db.Text
+  citedPages     Int[]    @map("cited_pages")
+  retrievedChunks String[] @map("retrieved_chunks") @db.Text
+  inputTokens    Int      @map("input_tokens")
+  outputTokens   Int      @map("output_tokens")
+  estimatedCost  Float    @map("estimated_cost_usd")
+  responseTimeMs Int      @map("response_time_ms")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("queries")
+}

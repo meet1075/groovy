@@ -42,14 +42,6 @@ export default function App() {
     setChatKey((k) => k + 1);
   }, [resetQueries]);
 
-  if (documents.length === 0 && !currentDoc) {
-    return (
-      <div className="flex h-screen">
-        <Home onUpload={handleUpload} loading={docLoading} />
-      </div>
-    );
-  }
-
   return (
     <div className="flex h-screen">
       <Sidebar
@@ -69,9 +61,7 @@ export default function App() {
           onAsk={ask}
         />
       ) : (
-        <div className="flex-1 flex items-center justify-center bg-ink-950">
-          <p className="text-ink-500 text-sm">Select a document or upload a new one</p>
-        </div>
+        <Home onUpload={handleUpload} loading={docLoading} />
       )}
     </div>
   );
