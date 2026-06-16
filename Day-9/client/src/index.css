@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Code textarea styling */
+.code-textarea {
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+.code-textarea:focus {
+  outline: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+/* Markdown output styling */
+.markdown-output h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 1rem;
+}
+
+.markdown-output h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.markdown-output h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.markdown-output p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.markdown-output ul,
+.markdown-output ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-output li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-output ul li {
+  list-style-type: disc;
+}
+
+.markdown-output ol li {
+  list-style-type: decimal;
+}
+
+.markdown-output pre {
+  background: #1e293b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.dark .markdown-output pre {
+  background: #0f172a;
+}
+
+.markdown-output code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+}
+
+.markdown-output :not(pre) > code {
+  background: #e2e8f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.dark .markdown-output :not(pre) > code {
+  background: #1e293b;
+  color: #f472b6;
+}
+
+.markdown-output strong {
+  font-weight: 600;
+}
+
+.markdown-output blockquote {
+  border-left: 3px solid #14b8a6;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  color: #6b7280;
+}
+
+.dark .markdown-output blockquote {
+  color: #9ca3af;
+}
+
+.markdown-output hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 1rem 0;
+}
+
+.dark .markdown-output hr {
+  border-color: #374151;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}

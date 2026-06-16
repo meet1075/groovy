@@ -1,0 +1,16 @@
+{
+  "name": "day-9-multi-provider-chatbot",
+  "version": "1.0.0",
+  "description": "Multi-provider AI chatbot with CSV logging, streaming, retry & dashboard",
+  "main": "chatbot.js",
+  "type": "module",
+  "scripts": {
+    "groq": "node chatbot.js --provider groq",
+    "gemini": "node chatbot.js --provider gemini",
+    "cohere": "node chatbot.js --provider cohere",
+    "dashboard": "node dashboard.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
