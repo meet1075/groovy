@@ -71,7 +71,7 @@ async function callGroq(messages) {
         Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages, stream: true }),
+      body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages, stream: true, stream_options: { include_usage: true } }),
     });
 
     if (!res.ok) {
