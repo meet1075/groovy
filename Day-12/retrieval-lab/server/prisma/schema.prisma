@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id         Int         @id @default(autoincrement())
+  filename   String      @db.VarChar(255)
+  uploadedAt DateTime    @default(now()) @map("uploaded_at")
+  pageCount  Int         @map("page_count")
+
+  ingestions Ingestion[]
+  labRuns    LabRun[]
+
+  @@map("documents")
+}
+
+model Ingestion {
+  id               Int      @id @default(autoincrement())
+  documentId       Int      @map("document_id")
+  strategy         String   @db.VarChar(50)
+  chunkCount       Int      @default(0) @map("chunk_count")
+  pineconeNamespace String  @map("pinecone_namespace") @db.VarChar(100)
+  provider         String   @default("gemini") @db.VarChar(20)
+  ingestedAt       DateTime @default(now()) @map("ingested_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, strategy])
+  @@map("ingestions")
+}
+
+model LabRun {
+  id         Int      @id @default(autoincrement())
+  documentId Int      @map("document_id")
+  question   String   @db.Text
+  rerankUsed Boolean  @default(false) @map("rerank_used")
+  results    Json
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("lab_runs")
+}
